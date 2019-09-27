@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-	
+import './card.css';
 
 class Card extends Component {
   constructor(){
@@ -18,19 +18,28 @@ class Card extends Component {
 
     //films
     const filmsArray = [];
-    const fetchFilms = this.props.films.map((filmUrl, i) => { 
-      fetch(filmUrl) 
-    	.then(response => response.json())
-    	.then(data => {filmsArray.push(data.title)
-      this.setState({films: filmsArray})}
-    	)
+    this.props.films.forEach((filmUrl, i) => { fetch(filmUrl) 
+        .then(response => response.json())
+        .then(data => filmsArray.push(`${data.episode_id} - ${data.title}`)
+        )
     })
+    this.setState({films: filmsArray})
+
+    // const filmsArray = [];
+    // const fetchFilms = this.props.films.map((filmUrl, i) => { 
+    //   fetch(filmUrl) 
+    // 	.then(response => response.json())
+    // 	.then(data => {filmsArray.push(`${data.episode_id} - ${data.title}`)
+    //     //filmsArray.push(`${data.episode_id} - ${data.title}`);
+    //   this.setState({films: filmsArray})}
+    // 	)
+    // })
 }
   render(){ 
   	const { species, films } = this.state;
     const { name } = this.props;
   	return(
-  		 <div className="bg-yellow tc dib br1 pa1 ma4 grow bw1 shadow-1 w-25">
+  		 <div className="card bg-yellow tc dib br1 pa1 ma4 grow bw1 shadow-1 w-25">
 	    	<div className="pa2">
 	      		<h2>{name}</h2>
 	      		<h4>{species}</h4>
