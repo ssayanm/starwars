@@ -5,11 +5,11 @@ import Scroll from '../components/Scroll';
 import ErrorBoundary from '../components/ErrorBoundary';
 import './App.css';
 
-const urls = [
-  'https://swapi.co/api/people',
-  'https://swapi.co/api/films',
-  'https://swapi.co/api/species'
-]
+// const urls = [
+//   'https://swapi.co/api/people',
+//   'https://swapi.co/api/films',
+//   'https://swapi.co/api/species'
+// ]
 
 
 class App extends Component {
@@ -41,8 +41,7 @@ componentDidMount() {
 
     fetch(url)
       .then(response => response.json())
-      .then(people => this.setState({ data: people.results }))
-      
+      .then(people => this.setState({ data: people.results }))   
     }
 
   render(){  
