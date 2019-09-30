@@ -17,34 +17,29 @@ class Card extends Component {
       .then(species => this.setState({ species: species.name }))
 
     //films
-    const filmsArray = [];
-    this.props.films.forEach((filmUrl, i) => { fetch(filmUrl) 
-        .then(response => response.json())
-        .then(data => filmsArray.push(`${data.episode_id} - ${data.title}`)
+    const fetchPromises = this.props.films.map((filmUrl, i) => { 
+      return fetch(filmUrl) 
+        .then(response => response.json()
         )
     })
-    this.setState({films: filmsArray})
 
-    // const filmsArray = [];
-    // const fetchFilms = this.props.films.map((filmUrl, i) => { 
-    //   fetch(filmUrl) 
-    // 	.then(response => response.json())
-    // 	.then(data => {filmsArray.push(`${data.episode_id} - ${data.title}`)
-    //     //filmsArray.push(`${data.episode_id} - ${data.title}`);
-    //   this.setState({films: filmsArray})}
-    // 	)
-    // })
+    Promise.all(fetchPromises).then(results => {
+      this.setState({films: results.map(film => { return [film.episode_id, ' ' ,'-',' ',film.title] })})
+    });
+
 }
   render(){ 
   	const { species, films } = this.state;
     const { name } = this.props;
   	return(
-  		 <div className="card bg-yellow tc dib br1 pa1 ma4 grow bw1 shadow-1 w-25">
+  		 <div className="card bg-yellow tc dib br1 pa1 ma4 grow bw1 shadow-1 w-25 br4">
 	    	<div className="pa2">
-	      		<h2>{name}</h2>
-	      		<h4>{species}</h4>
+	      		<h2>{name} ({species})</h2>
+            <hr/>
+
+            <h4>Featured Movies</h4>
 	      		<ul className="ul-style">
-              		{films.map((film, i) => (
+              		{films.map((film,name, i) => (
 	                <li key={i}>
 	   					{film}
 	                </li>

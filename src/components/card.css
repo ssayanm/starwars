@@ -1,0 +1,26 @@
+.ul-style{
+	display: block;
+	text-decoration-style: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	font-style: italic;
+}
+
+.ul-style li{
+	margin: 0;
+	padding: 5px;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  transition: all 200ms ease;
+  vertical-align: top;
+}
+
+.CardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

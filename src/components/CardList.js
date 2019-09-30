@@ -5,7 +5,7 @@ const CardList = (props) => {
 	const { data } = props;
 
 	return (
-	    <div className='tc'>	    	
+	    <div className='CardContainer '>	    	
 	    	{ data.map((user, i) => {
 			return ( 
 				<Card 
